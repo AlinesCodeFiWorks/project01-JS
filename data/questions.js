@@ -40,7 +40,7 @@ export const questionBank = [
     },
     answer: "c",
     feedback: {
-      correct: "Very good, the sky is blue!",
+      correct: "Very good, the sky is always blue!",
       incorrect: "You should go out more often",
     },
   },
