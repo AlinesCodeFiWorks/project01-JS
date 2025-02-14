@@ -1,9 +1,10 @@
+//TODO import random number generator from utils file
 //Function to display questions from the question bank
 export function renderQuiz(dataSet) {
   const quizInterface = document.querySelector(".quizInterface");
   quizInterface.innerHTML = ""; // clear previous question
   dataSet.forEach((question) => {
-    quizInterface.innerHTML += `<h2>${question.question}</h2>
+    quizInterface.innerHTML = `<h2>${question.question}</h2>
     <form id="${question.questionId}" class="optionsForm">
     <input type="radio" name="${question.questionId}" id="${question.questionId}a" value="a">
     <label for="${question.questionId}a">a. ${question.options.a}</label>
@@ -23,11 +24,16 @@ export function renderQuiz(dataSet) {
   });
   document.querySelectorAll(".submitAnswer").forEach((submitButton) => {
     submitButton.addEventListener("click", (event) => {
+      console.log(event);
       const questionId = event.target.dataset.questionId; // Get the question ID from button
       evaluateAnswer(questionId, dataSet);
     });
   });
 }
+
+//TODO Create a loop within the forEach so that only one question displays at a time
+
+// TODO plug in a random number generator
 
 //function to evaluate submission
 export function evaluateAnswer(questionId, dataSet) {
@@ -38,21 +44,19 @@ export function evaluateAnswer(questionId, dataSet) {
   // Find the selected answer
   const selectedOption = document.querySelector(
     `input[name="${questionId}"]:checked`
+    //Explanation: this part selects an <input> element with a name attribute that matches the value of questionId.
   );
   const feedbackDisplay = document.getElementById(`feedback-${questionId}`); // Target individual feedback
 
   if (!selectedOption) {
     feedbackDisplay.textContent = "Please select an answer!";
-    feedbackDisplay.style.color = "red";
     return;
   }
 
-  // Check if the answer is correct
+  // Check if the answer is correct and displaying associated feedback
   if (selectedOption.value === question.answer) {
     feedbackDisplay.textContent = question.feedback.correct;
-    feedbackDisplay.style.color = "green";
   } else {
     feedbackDisplay.textContent = question.feedback.incorrect;
-    feedbackDisplay.style.color = "red";
   }
 }
