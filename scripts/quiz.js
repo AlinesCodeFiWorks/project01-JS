@@ -1,6 +1,7 @@
 //TODO import random number generator from utils file
 //Function to display questions from the question bank
 let currentQuestion = 0; //setting up variable to store currently displayed question
+let currentScore = 0; //setting up variable for score tracking
 export function renderQuiz(dataSet) {
   const quizInterface = document.querySelector(".quizInterface");
 
@@ -58,9 +59,13 @@ export function evaluateAnswer(questionId, dataSet) {
   // Check if the answer is correct and displaying associated feedback
   if (selectedOption.value === question.answer) {
     feedbackDisplay.textContent = question.feedback.correct;
+    currentScore += 1;
   } else {
     feedbackDisplay.textContent = question.feedback.incorrect;
   }
+
+  const scoreTracker = document.querySelector(".scoreTracker");
+  scoreTracker.innerHTML = currentScore;
 
   //
   const nextButton = document.createElement("button");
@@ -74,6 +79,5 @@ export function evaluateAnswer(questionId, dataSet) {
       window.location.href = "result.html"; // redirects user to result page once no questions are available . This is really neat!
     }
   });
-
   feedbackDisplay.after(nextButton); // Insert the button right after the feedback message. Looks like this is a "node"? Look it up!
 }
