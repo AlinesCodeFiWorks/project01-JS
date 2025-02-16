@@ -61,4 +61,19 @@ export function evaluateAnswer(questionId, dataSet) {
   } else {
     feedbackDisplay.textContent = question.feedback.incorrect;
   }
+
+  //
+  const nextButton = document.createElement("button");
+  nextButton.textContent = "Next";
+  nextButton.classList.add("nextQuestion");
+  nextButton.addEventListener("click", () => {
+    if (currentQuestion < dataSet.length - 1) {
+      currentQuestion++;
+      renderQuiz(dataSet);
+    } else {
+      window.location.href = "result.html"; // redirects user to result page once no questions are available . This is really neat!
+    }
+  });
+
+  feedbackDisplay.after(nextButton); // Insert the button right after the feedback message. Looks like this is a "node"? Look it up!
 }
