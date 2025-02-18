@@ -34,8 +34,6 @@ export function renderQuiz(dataSet) {
   });
 }
 
-//TODO Create a loop within the forEach so that only one question displays at a time
-
 // TODO plug in a random number generator
 
 //function to evaluate submission
@@ -65,7 +63,7 @@ export function evaluateAnswer(questionId, dataSet) {
   }
 
   const scoreTracker = document.querySelector(".scoreTracker");
-  scoreTracker.innerHTML = currentScore;
+  scoreTracker.innerHTML = `<p>${currentScore} out of ${dataSet.length}</p>`;
 
   //
   const nextButton = document.createElement("button");
@@ -76,8 +74,8 @@ export function evaluateAnswer(questionId, dataSet) {
       currentQuestion++;
       renderQuiz(dataSet);
     } else {
-      window.location.href = "result.html"; // redirects user to result page once no questions are available . This is really neat!
+      window.location.href = "result.html"; // redirects user to result page once no questions are available. This is really neat!
     }
   });
-  feedbackDisplay.after(nextButton); // Insert the button right after the feedback message. Looks like this is a "node"? Look it up!
+  feedbackDisplay.after(nextButton); // Insert the button right after the feedback message.
 }
