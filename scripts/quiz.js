@@ -74,6 +74,7 @@ export function evaluateAnswer(questionId, dataSet) {
       currentQuestion++;
       renderQuiz(dataSet);
     } else {
+      localStorage.setItem("finalScore", currentScore);
       window.location.href = "result.html"; // redirects user to result page once no questions are available. This is really neat!
     }
   });
