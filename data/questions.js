@@ -1,3 +1,4 @@
+// Initial question bank object for testing and preliminary setup
 export const questionBank = [
   {
     questionId: 1,
@@ -75,3 +76,25 @@ export const questionBank = [
     },
   },
 ];
+//trying out API integration
+export async function fetchQuestions(
+  amount = 5,
+  category = "",
+  difficulty = "easy",
+  type = "multiple"
+) {
+  try {
+    const url = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.response_code !== 0) {
+      throw new Error("Failed to fetch questions. Try again.");
+    }
+
+    return data.results; // returns an array of questions
+  } catch (error) {
+    console.error("Error fetching questions:", error);
+    return [];
+  }
+}

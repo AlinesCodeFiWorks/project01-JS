@@ -1,4 +1,5 @@
-import { renderQuiz, evaluateAnswer } from "./quiz.js";
-import { questionBank } from "../data/questions.js";
+import { renderQuiz, startQuiz, evaluateAnswer } from "./quiz.js";
+import { questionBank, fetchQuestions } from "../data/questions.js";
 
-renderQuiz(questionBank);
+//renderQuiz(questionBank);
+startQuiz();

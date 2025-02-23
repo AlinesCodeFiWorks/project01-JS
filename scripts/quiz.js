@@ -34,7 +34,30 @@ export function renderQuiz(dataSet) {
   });
 }
 
-// TODO plug in a random number generator
+// sourcing questions from API instead
+export async function startQuiz() {
+  document
+    .getElementById("quiz-settings")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const category = document.getElementById("category").value;
+      const difficulty = document.getElementById("difficulty").value;
+
+      const questions = await fetchQuestions(
+        10,
+        category,
+        difficulty,
+        "multiple"
+      );
+      if (questions.length > 0) {
+        console.log("Questions fetched:", questions);
+        // render quiz interface with fetched questions
+      } else {
+        console.log("No questions available.");
+      }
+    });
+}
 
 //function to evaluate submission
 export function evaluateAnswer(questionId, dataSet) {
