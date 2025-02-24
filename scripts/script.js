@@ -1,5 +1,6 @@
 import { renderQuiz, startQuiz, evaluateAnswer } from "./quiz.js";
 import { questionBank, fetchQuestions } from "../data/questions.js";
+import { NewQuestion } from "./crud.js";
 
 //troubleshooting console errors: making sure startQuiz() is only called after the page fully loads
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,4 +18,9 @@ async function initializeQuiz() {
 
 if (document.querySelector(".quizInterface")) {
   initializeQuiz(); // Run this only if the quiz page is loaded
+}
+
+if (document.querySelector(".newQuestionForm")) {
+  NewQuestion; // Run this only if the crud page is loaded
+  // TODO revise this once crud is built
 }
