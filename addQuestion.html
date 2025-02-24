@@ -17,9 +17,34 @@
       <p>Submit your own questions to the quiz, or clear all previously submitted questions.</p>
       </div>
       <div class="crud">
-        <form class="addQuestionForm">
+        <form class="newQuestionForm">
+          <!-- Input: difficulty -->
+          <label for="newDiff">Difficulty level:</label>
+          <select name="newDiff" id="newDiff" required>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select> <br>
+          <!-- Input: category -->
+          <label for="newCat">Category:</label>
+          <select name="newCat" id="newCat"required>
+            <option value="cat1">Category 1</option>
+            <option value="cat2">Category 2</option>
+            <option value="cat3">Category 3</option>
+          </select> <br>
+          <!-- Input: question -->
           <label for="newQuestion">Question:</label>
-          <input type="text" id="newQuestion" name="newQuestion" required minlength="4" maxlength="100"/>
+          <input type="text" id="newQuestion" name="newQuestion" required minlength="4" maxlength="100" required/> <br>
+          <!-- Input: correct answer -->
+          <label for="newCorrectAnswer">Correct answer:</label>
+          <input type="text" class="newCorrectAnswer" name="newCorrectAnswer" required minlength="1" maxlength="50" required/> <br>
+          <!-- Input: incorrect answers -->
+          <label for="newIncorrectAnswer">Incorrect answers:</label>
+          <input type="text" class="newIncorrectAnswer" name="newIncorrectAnswer" required minlength="1" maxlength="50" required/> <br>
+          <input type="text" class="newIncorrectAnswer" name="newIncorrectAnswer" required minlength="1" maxlength="50" required/> <br>
+          <input type="text" class="newIncorrectAnswer" name="newIncorrectAnswer" required minlength="1" maxlength="50" required/> <br>
+
+          <button type="submit">Submit my question</button>
         </form>
         <br>
         <button class="clearSubmittedQuestions">Clear all previously submitted questions</button>
@@ -33,6 +58,6 @@
     <footer>
       <!-- TODO load footer partial here -->
     </footer>
-    <script src="/scripts/crud.js" type="module" defer></script>
+    <script src="/scripts/script.js" type="module" defer></script>
   </body>
 </html>
