@@ -63,13 +63,12 @@ export function startQuiz() {
     window.location.href = `/quiz.html?category=${category}&difficulty=${difficulty}`;
   });
 }
-startQuiz();
 //function to evaluate submission
 export function evaluateAnswer(questionIndex, dataSet) {
   const question = dataSet[questionIndex];
   // Find the selected answer
   const selectedOption = document.querySelector(
-    `input[name="${questionIndex}"]:checked`
+    `input[name="question${currentQuestion}"]:checked`
     //Explanation: this part selects an <input> element with a name attribute that matches the value of questionId.
   );
   const feedbackDisplay = document.getElementById(`feedback-${questionIndex}`); // Target individual feedback
