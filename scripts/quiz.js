@@ -60,7 +60,9 @@ export async function startQuiz() {
       );
       if (questions.length > 0) {
         console.log("Questions fetched:", questions);
-        // render quiz interface with fetched questions
+        renderQuiz(questions);
+        // render quiz interface with fetched questions but only if questions exist
+        window.location.href = "/quiz.html"; // redirect only after questions are ready
       } else {
         console.log("No questions available.");
       }

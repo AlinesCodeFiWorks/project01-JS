@@ -92,7 +92,7 @@ export async function fetchQuestions(
       throw new Error("Failed to fetch questions. Try again.");
     }
 
-    return data.results; // returns an array of questions
+    return data.results || []; //always returns an array of questions
   } catch (error) {
     console.error("Error fetching questions:", error);
     return [];
