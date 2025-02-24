@@ -1,3 +1,9 @@
+// Get category and difficulty from the URL
+const urlParams = new URLSearchParams(window.location.search);
+const category = urlParams.get("category") || "";
+const difficulty = urlParams.get("difficulty") || "";
+
+import { questionBank, fetchQuestions } from "../data/questions.js";
 //Function to display questions from the question bank
 let currentQuestion = 0; //setting up variable to store currently displayed question
 let currentScore = 0; //setting up variable for score tracking
@@ -43,32 +49,21 @@ export function renderQuiz(dataSet) {
 }
 
 // sourcing questions from API instead
-export async function startQuiz() {
-  document
-    .getElementById("quiz-settings")
-    .addEventListener("submit", async function (event) {
-      event.preventDefault();
+export function startQuiz() {
+  const quizForm = document.getElementById("quiz-settings");
+  if (!quizForm) return; // Ensure the form exists before adding the event listener
 
-      const category = document.getElementById("category").value;
-      const difficulty = document.getElementById("difficulty").value;
+  quizForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
 
-      const questions = await fetchQuestions(
-        10,
-        category,
-        difficulty,
-        "multiple"
-      );
-      if (questions.length > 0) {
-        console.log("Questions fetched:", questions);
-        renderQuiz(questions);
-        // render quiz interface with fetched questions but only if questions exist
-        window.location.href = "/quiz.html"; // redirect only after questions are ready
-      } else {
-        console.log("No questions available.");
-      }
-    });
+    const category = document.getElementById("category").value;
+    const difficulty = document.getElementById("difficulty").value;
+
+    // Redirect to quiz.html with query parameters
+    window.location.href = `/quiz.html?category=${category}&difficulty=${difficulty}`;
+  });
 }
-
+startQuiz();
 //function to evaluate submission
 export function evaluateAnswer(questionIndex, dataSet) {
   const question = dataSet[questionIndex];

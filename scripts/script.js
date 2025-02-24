@@ -15,4 +15,6 @@ async function initializeQuiz() {
   }
 }
 
-initializeQuiz(); // Call the function to start the quiz properly
+if (document.querySelector(".quizInterface")) {
+  initializeQuiz(); // Run this only if the quiz page is loaded
+}
