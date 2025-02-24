@@ -18,10 +18,13 @@
       </div>
       <div class="crud">
         <form class="addQuestionForm">
-
+          <label for="newQuestion">Question:</label>
+          <input type="text" id="newQuestion" name="newQuestion" required minlength="4" maxlength="100"/>
         </form>
+        <br>
         <button class="clearSubmittedQuestions">Clear all previously submitted questions</button>
       </div>
+      <br>
       <div class="finalRedirection">
         <button><a href="index.html">Home</a></button>
         <button><a href="quiz.html">Start quiz!</a></button>
