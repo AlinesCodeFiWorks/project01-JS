@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz Master</title>
-    <link rel="stylesheets" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/styles.css" />
   </head>
   <body>
     <header>
@@ -13,7 +13,8 @@
     </header>
     <main>
       <div class="intro">
-        <h1>Quiz Master</h1>      
+        <h1>Quiz Master</h1>
+        <h2>Add Your Own</h2>      
       <p>Submit your own questions to the quiz, or clear all previously submitted questions.</p>
       </div>
       <div class="crud">
@@ -47,6 +48,8 @@
           <button type="submit">Submit my question</button>
         </form>
         <br>
+        <h2>Submitted Questions</h2>
+        <ul id="questionList"></ul>
         <button class="clearSubmittedQuestions">Clear all previously submitted questions</button>
       </div>
       <br>
