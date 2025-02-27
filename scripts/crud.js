@@ -1,3 +1,8 @@
+// ingredients
+const form = document.querySelectorAll(".newQuestionForm");
+const questionList = document.querySelectorAll("#questionList");
+const clearButton = document.querySelectorAll(".clearSubmittedQuestions");
+
 export class NewQuestion {
   constructor(difficulty, category, question, correctAnswer, incorrectAnswers) {
     this.type = "multiple";
@@ -8,11 +13,6 @@ export class NewQuestion {
     this.incorrectAnswers = incorrectAnswers;
   }
 }
-
-// ingredients
-const form = document.querySelector(".newQuestionForm");
-const questionList = document.querySelector("#questionList");
-const clearButton = document.querySelector(".clearSubmittedQuestions");
 
 // Load stored questions on page load
 document.addEventListener("DOMContentLoaded", displayStoredQuestions);
