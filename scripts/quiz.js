@@ -3,10 +3,13 @@ const urlParams = new URLSearchParams(window.location.search);
 const category = urlParams.get("category") || "";
 const difficulty = urlParams.get("difficulty") || "";
 
-import { questionBank, fetchQuestions } from "../data/questions.js";
-//Function to display questions from the question bank
-let currentQuestion = 0; //setting up variable to store currently displayed question
-let currentScore = 0; //setting up variable for score tracking
+import { fetchQuestions } from "../data/questions.js";
+
+let currentQuestion = 0; //variable to store currently displayed question
+let currentScore = 0; //variable for score tracking
+let questions = []; //empty array to hold combined questions
+
+//function to load the quiz
 export function renderQuiz(dataSet) {
   const quizInterface = document.querySelector(".quizInterface");
 
@@ -14,8 +17,11 @@ export function renderQuiz(dataSet) {
 
   const question = dataSet[currentQuestion];
 
-  // Combine correct and incorrect answers
-  let options = [...question.incorrect_answers, question.correct_answer];
+  // Combine answers (handling both API & user-submitted formats)
+  let options = question.incorrect_answers
+    ? [...question.incorrect_answers, question.correct_answer]
+    : [...question.options];
+
   options = shuffleArray(options); // Shuffle so the correct answer isn't always last
 
   let optionsHtml = options
@@ -49,15 +55,25 @@ export function renderQuiz(dataSet) {
 }
 
 // sourcing questions from API instead
-export function startQuiz() {
+export async function startQuiz() {
+  try {
+    questions = await fetchQuestions(5, category, difficulty); // Fetch API and user-submitted questions
+
+    if (questions.length === 0) {
+      console.error("No questions available.");
+      return;
+    }
+
+    currentQuestion = 0;
+    currentScore = 0;
+  } catch (error) {
+    console.error("Error starting the quiz:", error);
+  }
   const quizForm = document.getElementById("quiz-settings");
   if (!quizForm) return; // Ensure the form exists before adding the event listener
 
   quizForm.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
-
-    const category = document.getElementById("category").value;
-    const difficulty = document.getElementById("difficulty").value;
 
     // Redirect to quiz.html with query parameters
     window.location.href = `/quiz.html?category=${category}&difficulty=${difficulty}`;
@@ -78,12 +94,15 @@ export function evaluateAnswer(questionIndex, dataSet) {
     return;
   }
 
+  // integrate user-submitted question format
+  const correctAnswer = question.correct_answer || question.correctAnswer;
+
   // Check if the answer is correct and displaying associated feedback
-  if (selectedOption.value === question.correct_answer) {
+  if (selectedOption.value === correctAnswer) {
     feedbackDisplay.textContent = "That's correct!";
-    currentScore += 1;
+    currentScore++;
   } else {
-    feedbackDisplay.textContent = `Not quite! The correct answer was: ${question.correct_answer}`;
+    feedbackDisplay.textContent = `Not quite! The correct answer was: ${correctAnswer}`;
   }
 
   const scoreTracker = document.querySelector(".scoreTracker");

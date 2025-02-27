@@ -1,5 +1,5 @@
 import { renderQuiz, startQuiz, evaluateAnswer } from "./quiz.js";
-import { questionBank, fetchQuestions } from "../data/questions.js";
+import { fetchQuestions } from "../data/questions.js";
 import { NewQuestion } from "./crud.js";
 
 //troubleshooting console errors: making sure startQuiz() is only called after the page fully loads

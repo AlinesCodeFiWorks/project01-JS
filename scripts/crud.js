@@ -11,41 +11,56 @@ export class NewQuestion {
 
 // ingredients
 const form = document.querySelector(".newQuestionForm");
-const questionList = document.createElement("ul");
-document.body.appendChild(questionList);
+const questionList = document.querySelector("#questionList");
 const clearButton = document.querySelector(".clearSubmittedQuestions");
 
 // Load stored questions on page load
 document.addEventListener("DOMContentLoaded", displayStoredQuestions);
 
 // form submission
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
+if (form) {
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  // retrieve form inputs
-  const difficulty = document.querySelector("#newDiff").value;
-  const category = document.querySelector("#newCat").value;
-  const question = document.querySelector("#newQuestion").value;
-  const correctAnswer = document.querySelector(".newCorrectAnswer").value;
-  const incorrectAnswers = [
-    ...document.querySelectorAll(".newIncorrectAnswer"),
-  ].map((input) => input.value);
+    // retrieve form inputs
+    const difficulty = document.querySelector("#newDiff").value;
+    const category = document.querySelector("#newCat").value;
+    const question = document.querySelector("#newQuestion").value;
+    const correctAnswer = document.querySelector(".newCorrectAnswer").value;
+    const incorrectAnswers = [
+      ...document.querySelectorAll(".newIncorrectAnswer"),
+    ].map((input) => input.value);
 
-  // Create a new question instance
-  const newQuestion = new NewQuestion(
-    difficulty,
-    category,
-    question,
-    correctAnswer,
-    incorrectAnswers
+    // Create a new question instance
+    const newQuestion = new NewQuestion(
+      difficulty,
+      category,
+      question,
+      correctAnswer,
+      incorrectAnswers
+    );
+
+    // Store in localStorage
+    saveQuestion(newQuestion);
+
+    // Reset the form
+    form.reset();
+  });
+} else {
+  console.error(
+    "Form not found. Check if the class 'newQuestionForm' is correct."
   );
-
-  // Store in localStorage
-  saveQuestion(newQuestion);
-
-  // Reset the form
-  form.reset();
-});
+}
+if (clearButton) {
+  clearButton.addEventListener("click", function () {
+    localStorage.removeItem("questions");
+    displayStoredQuestions();
+  });
+} else {
+  console.error(
+    "Clear button not found. Check if the class 'clearSubmittedQuestions' is correct."
+  );
+}
 
 // Save question to localStorage
 function saveQuestion(question) {
@@ -72,6 +87,7 @@ function displayStoredQuestions() {
   document.querySelectorAll(".delete").forEach((button) => {
     button.addEventListener("click", deleteQuestion);
   });
+
   // Delete a specific question
   function deleteQuestion(event) {
     let questions = JSON.parse(localStorage.getItem("questions")) || [];
