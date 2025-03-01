@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz Master</title>
-    <link rel="stylesheets" href="/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/styles.css" />
   </head>
   <body>
     <header>
@@ -13,8 +13,12 @@
     </header>
     <main>
       <div class="intro">
-        <h1>Quiz Master</h1>      
-      <p>Submit your own questions to the quiz, or clear all previously submitted questions.</p>
+        <h1>Quiz Master</h1>
+        <h2>Add Your Own</h2>
+        <p>
+          Submit your own questions to the quiz, or clear all previously
+          submitted questions.
+        </p>
       </div>
       <div class="crud">
         <form class="newQuestionForm">
@@ -24,40 +28,87 @@
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
-          </select> <br>
+          </select>
+          <br />
           <!-- Input: category -->
           <label for="newCat">Category:</label>
-          <select name="newCat" id="newCat"required>
+          <select name="newCat" id="newCat" required>
             <option value="cat1">Category 1</option>
             <option value="cat2">Category 2</option>
             <option value="cat3">Category 3</option>
-          </select> <br>
+          </select>
+          <br />
           <!-- Input: question -->
           <label for="newQuestion">Question:</label>
-          <input type="text" id="newQuestion" name="newQuestion" required minlength="4" maxlength="100" required/> <br>
+          <input
+            type="text"
+            id="newQuestion"
+            name="newQuestion"
+            minlength="4"
+            maxlength="100"
+            required
+          />
+          <br />
           <!-- Input: correct answer -->
           <label for="newCorrectAnswer">Correct answer:</label>
-          <input type="text" class="newCorrectAnswer" name="newCorrectAnswer" required minlength="1" maxlength="50" required/> <br>
+          <input
+            type="text"
+            class="newCorrectAnswer"
+            name="newCorrectAnswer"
+            minlength="1"
+            maxlength="50"
+            required
+          />
+          <br />
           <!-- Input: incorrect answers -->
           <label for="newIncorrectAnswer">Incorrect answers:</label>
-          <input type="text" class="newIncorrectAnswer" name="newIncorrectAnswer" required minlength="1" maxlength="50" required/> <br>
-          <input type="text" class="newIncorrectAnswer" name="newIncorrectAnswer" required minlength="1" maxlength="50" required/> <br>
-          <input type="text" class="newIncorrectAnswer" name="newIncorrectAnswer" required minlength="1" maxlength="50" required/> <br>
+          <input
+            type="text"
+            class="newIncorrectAnswer"
+            name="newIncorrectAnswer"
+            minlength="1"
+            maxlength="50"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            class="newIncorrectAnswer"
+            name="newIncorrectAnswer"
+            minlength="1"
+            maxlength="50"
+            required
+          />
+          <br />
+          <input
+            type="text"
+            class="newIncorrectAnswer"
+            name="newIncorrectAnswer"
+            minlength="1"
+            maxlength="50"
+            required
+          />
+          <br />
 
           <button type="submit">Submit my question</button>
         </form>
-        <br>
-        <button class="clearSubmittedQuestions">Clear all previously submitted questions</button>
+        <br />
+        <h2>Submitted Questions</h2>
+        <ul id="questionList"></ul>
+        <button class="clearSubmittedQuestions">
+          Clear all previously submitted questions
+        </button>
       </div>
-      <br>
+      <br />
       <div class="finalRedirection">
         <button><a href="index.html">Home</a></button>
-        <button><a href="quiz.html">Start quiz!</a></button>
-
+      </div>
     </main>
     <footer>
       <!-- TODO load footer partial here -->
     </footer>
     <script src="/scripts/script.js" type="module" defer></script>
+    <script src="/scripts/crud.js" type="module" defer></script>
+    <script src="/scripts/quiz.js" type="module" defer></script>
   </body>
 </html>

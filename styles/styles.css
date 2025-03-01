@@ -1,0 +1,75 @@
+/* color scheme */
+:root {
+  --backgroundMain: aqua;
+  --backgroudQuiz: yellow;
+  --backgroundResult: pink;
+  --backgroundCrud: purple;
+  --fontStd: black;
+  --fontHighlighted: blue;
+  --linkStd: red;
+  --linkHighlighted: red;
+  --inputField: white;
+  --buttonStd: white;
+  --buttonHighlighted: gray;
+  --containerMain: yellow;
+  --containerHighlighted: red;
+}
+
+/* global styling */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--backgroundMain);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.intro {
+  text-align: center;
+}
+a {
+  text-decoration: none;
+  color: var(--linkStd);
+}
+
+/* button styling */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+button:hover {
+  background-color: var(--buttonHighlighted);
+}
+/* form styling */
+/* main page styling */
+.quizSelections {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.quizSelections select {
+  display: block;
+}
+/* quiz page styling */
+.scoreTracker {
+  background-color: none;
+}
+.quizInterface {
+  background-color: none;
+  display: grid;
+}
+/* result page styling */
+.finalScore {
+  background-color: none;
+}
+.finalRedirection {
+  background-color: none;
+  align-items: center;
+}
+/* crud page styling */
+.crud {
+  background-color: none;
+  display: grid;
+}
