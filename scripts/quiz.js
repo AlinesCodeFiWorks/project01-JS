@@ -17,11 +17,22 @@ export function renderQuiz(dataSet) {
 
   const question = dataSet[currentQuestion];
 
-  // Combine answers (handling both API & user-submitted formats)
-  let options = question.incorrect_answers
-    ? [...question.incorrect_answers, question.correct_answer]
-    : [...question.options];
+  // Check if the question format is correct
+  if (
+    !question.question ||
+    (!question.correct_answer && !question.correctAnswer)
+  ) {
+    console.error("Question format error:", question);
+    return; // Prevents rendering a broken question
+  }
 
+  // Standardize the keys for correct_answer and incorrect_answers
+  const correctAnswer = question.correct_answer || question.correctAnswer;
+  const incorrectAnswers =
+    question.incorrect_answers || question.incorrectAnswers || [];
+
+  // Combine answers (handling both API & user-submitted formats)
+  let options = [...incorrectAnswers, correctAnswer];
   options = shuffleArray(options); // Shuffle so the correct answer isn't always last
 
   let optionsHtml = options
@@ -46,7 +57,7 @@ export function renderQuiz(dataSet) {
       .sort((a, b) => a.order - b.order)
       .map(({ item }) => item);
   }
-
+  // ensuring button exists before attaching an event listener
   setTimeout(() => {
     document.querySelector(".submitAnswer").addEventListener("click", () => {
       evaluateAnswer(currentQuestion, dataSet);
@@ -54,10 +65,54 @@ export function renderQuiz(dataSet) {
   }, 0);
 }
 
-// sourcing questions from API instead
+// Handle API rate limiting and fetching
+async function fetchQuestionsWithRetry(amount, category, difficulty) {
+  const url = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`;
+
+  for (let i = 0; i < 3; i++) {
+    // Retry 3 times
+    try {
+      const response = await fetch(url);
+
+      if (response.status === 429) {
+        // If rate-limited (too many requests)
+        console.warn("Rate limit hit. Retrying in 2 seconds...");
+        await delay(2000); // Wait 2 seconds before retrying
+        continue;
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.results; // Return the questions
+    } catch (error) {
+      console.error("Error fetching questions:", error);
+    }
+  }
+
+  return []; // Return empty if all retries fail
+}
+
+// Delay function
+async function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// start the quiz by fetching questions and storing them in localStorage to avoid the rate-limited error
+
 export async function startQuiz() {
   try {
-    questions = await fetchQuestions(5, category, difficulty); // Fetch API and user-submitted questions
+    let cachedQuestions = localStorage.getItem("quizQuestions");
+
+    // Load cached questions if available, otherwise fetch from API
+    if (cachedQuestions) {
+      questions = JSON.parse(cachedQuestions); // Load from cache if available
+    } else {
+      questions = await fetchQuestionsWithRetry(5, category, difficulty); // Fetch from API
+      localStorage.setItem("quizQuestions", JSON.stringify(questions)); // Cache questions
+    }
 
     if (questions.length === 0) {
       console.error("No questions available.");
@@ -106,13 +161,14 @@ export function evaluateAnswer(questionIndex, dataSet) {
   }
 
   const scoreTracker = document.querySelector(".scoreTracker");
-  scoreTracker.innerHTML = `<p>${currentScore} out of ${dataSet.length}</p>`;
+  scoreTracker.innerHTML = `<p>${currentScore} out of 5</p>`;
 
-  //
+  // create next button
   const nextButton = document.createElement("button");
   nextButton.textContent = "Next";
   nextButton.classList.add("nextQuestion");
   nextButton.addEventListener("click", () => {
+    // Avoid creating a new copy of the dataset, just update the currentQuestion index
     if (currentQuestion < dataSet.length - 1) {
       currentQuestion++;
       renderQuiz(dataSet);
@@ -121,5 +177,10 @@ export function evaluateAnswer(questionIndex, dataSet) {
       window.location.href = "result.html"; // redirects user to result page once no questions are available. This is really neat!
     }
   });
-  feedbackDisplay.after(nextButton); // Insert the button right after the feedback message.
+  if (currentQuestion < dataSet.length - 1) {
+    feedbackDisplay.after(nextButton); // Insert the button right after the feedback message.
+  } else {
+    feedbackDisplay.after(nextButton); // Insert the button right after the feedback message.
+    nextButton.textContent = "Finish Quiz"; // If it's the last question, change button text to "Finish Quiz"
+  }
 }

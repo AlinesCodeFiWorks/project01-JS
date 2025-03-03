@@ -17,9 +17,9 @@ export function crud() {
       }
     }
     //get form and buttons
-    const form = document.querySelectorAll(".newQuestionForm");
-    const questionList = document.querySelectorAll("#questionList");
-    const clearButton = document.querySelectorAll(".clearSubmittedQuestions");
+    const form = document.querySelector(".newQuestionForm");
+    const questionList = document.querySelector("#questionList");
+    const clearButton = document.querySelector(".clearSubmittedQuestions");
 
     if (form) {
       form.addEventListener("submit", function (event) {
@@ -84,7 +84,6 @@ export function crud() {
         }</strong> <button class="delete" data-index="${index}">Delete</button>`;
         questionList.appendChild(listItem);
       });
-
       // Add event listeners to delete buttons
       document.querySelectorAll(".delete").forEach((button) => {
         button.addEventListener("click", deleteQuestion);
@@ -100,6 +99,6 @@ export function crud() {
       displayStoredQuestions();
     }
     // Load stored questions on page load
-    document.addEventListener("DOMContentLoaded", displayStoredQuestions);
+    displayStoredQuestions();
   });
 }
