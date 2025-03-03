@@ -1,7 +1,7 @@
 /* color scheme */
 :root {
-  --backgroundMain: aqua;
-  --backgroudQuiz: yellow;
+  --backgroundMain: #00b3b3;
+  --backgroundQuiz: rgba(255, 255, 0, 0.748);
   --backgroundResult: pink;
   --backgroundCrud: purple;
   --fontStd: black;
@@ -11,8 +11,15 @@
   --inputField: white;
   --buttonStd: white;
   --buttonHighlighted: gray;
-  --containerMain: yellow;
+  --containerMain: rgba(255, 255, 0, 0.759);
   --containerHighlighted: red;
+  --backgroundPattern: url("https://static.vecteezy.com/system/resources/previews/002/774/065/non_2x/abstract-simple-geometric-background-with-different-geometric-shapes-square-triangles-circles-dots-lines-memphis-style-bright-and-colorful-90s-style-neon-colors-pattern-vector.jpg");
+  --neonBlue: #00ffff;
+  --neonPink: #ff00ff;
+  --neonOrange: #ff7f00;
+  --neonGreen: #39ff14;
+  --neonPurple: #8a2be2;
+  --frostedOverlay: rgba(255, 255, 255, 0.5);
 }
 
 /* global styling */
@@ -22,57 +29,209 @@
 
 html {
   background-color: var(--backgroundMain);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Arial", sans-serif;
+  background-image: var(--backgroundPattern);
+  background-size: cover;
+  background-repeat: repeat;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: var(--fontStd);
+}
+
+/* intro */
 .intro {
   text-align: center;
+  margin: 2rem;
 }
+
+/* link styling */
 a {
   text-decoration: none;
   color: var(--linkStd);
+}
+
+a:hover {
+  color: var(--linkHighlighted);
+}
+
+/* home buttons */
+button.homeButton {
+  cursor: pointer;
+  border: 2px solid var(--fontStd);
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-weight: bold;
+  background-color: var(--buttonStd);
+  color: var(--fontStd);
+  font-size: 1.2rem;
+  transition: all 0.3s ease-in-out;
+  margin: 10px 0;
+  position: relative;
+}
+
+button.homeButton:hover {
+  background-color: var(--buttonHoverColor);
+  transform: scale(1.1);
+  color: var(--fontHighlighted);
+}
+
+button.homeButton:before {
+  content: "→"; /* Adding an arrow for fun */
+  font-size: 1.5rem;
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  transform: translateY(-50%);
+  transition: left 0.3s ease;
+}
+
+button.homeButton:hover:before {
+  left: -45px;
 }
 
 /* button styling */
 button {
   cursor: pointer;
   border: none;
-  border-radius: 5px;
-  padding: 5px;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: var(--buttonStd);
+  color: var(--fontStd);
+  transition: all 0.3s ease;
 }
+
 button:hover {
   background-color: var(--buttonHighlighted);
+  transform: scale(1.05);
 }
-/* form styling */
-/* main page styling */
-.quizSelections {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+/* frosted overlay behind text */
+.frosted-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--overlayColor);
+  backdrop-filter: blur(10px); /* frosted effect */
+  z-index: -1; /* Keeps it behind text */
 }
-.quizSelections select {
-  display: block;
-}
+
 /* quiz page styling */
 .scoreTracker {
-  background-color: none;
+  background-color: var(--neonGreen);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
 }
+
 .quizInterface {
-  background-color: none;
+  background-color: var(--backgroundQuiz);
   display: grid;
+  place-items: center;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  position: relative; /* to ensure frosted overlay doesn't interfere */
 }
-.disabled {
-  display: none;
+
+.quizInterface input[type="radio"] {
+  margin-right: 10px; /* spacing between radio button and label */
+  vertical-align: middle;
 }
+
+.quizInterface label {
+  font-size: 16px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.quizInterface h2 {
+  color: var(--neonOrange);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.optionsForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+  justify-items: center; /* better alignment */
+}
+
+.optionsForm label {
+  color: var(--fontStd);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1.2rem;
+}
+
+.optionsForm input[type="radio"] {
+  margin-right: 12px;
+}
+
+.submitAnswer {
+  background-color: var(--neonPurple);
+  color: var(--fontStd);
+  font-size: 1rem;
+  padding: 0.8rem 2rem;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.submitAnswer:hover {
+  background-color: var(--neonBlue);
+}
+
 /* result page styling */
 .finalScore {
-  background-color: none;
+  background-color: var(--backgroundResult);
+  color: var(--fontStd);
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 10px;
 }
+
 .finalRedirection {
-  background-color: none;
-  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
-/* crud page styling */
-.crud {
-  background-color: none;
-  display: grid;
+
+.finalRedirection button {
+  margin: 0 1rem;
+  background-color: var(--neonOrange);
+}
+
+.finalRedirection button:hover {
+  background-color: var(--neonPink);
+}
+
+/* media queries for smaller screens */
+@media (max-width: 768px) {
+  .quizSelections,
+  .quizInterface,
+  .crud {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .quizInterface h2 {
+    font-size: 1.5rem;
+  }
+
+  .optionsForm {
+    grid-template-columns: 1fr;
+  }
 }
