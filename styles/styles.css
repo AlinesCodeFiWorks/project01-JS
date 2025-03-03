@@ -1,7 +1,7 @@
 /* color scheme */
 :root {
   --backgroundMain: #00b3b3;
-  --backgroundQuiz: rgba(255, 255, 0, 0.748);
+  --backgroundQuiz: rgba(63, 63, 38, 0.748);
   --backgroundResult: pink;
   --backgroundCrud: purple;
   --fontStd: rgb(255, 255, 255);
@@ -17,7 +17,7 @@
   --neonBlue: #00ffff;
   --neonPink: #ff00ff;
   --neonOrange: #e2a364;
-  --neonGreen: #39ff14;
+  --neonGreen: #395b339c;
   --neonPurple: #8a2be2;
   --frostedOverlay: rgba(255, 255, 255, 0.5);
 }
@@ -142,7 +142,7 @@ button:hover {
 
 .quizInterface input[type="radio"] {
   margin-right: 10px; /* spacing between radio button and label */
-  vertical-align: middle;
+  /* vertical-align: middle; */
 }
 
 .quizInterface label {
