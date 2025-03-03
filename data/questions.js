@@ -25,11 +25,22 @@ export async function fetchQuestions(
     });
 
     // combine api and submitted questions
-    let combinedQuestions = [...apiQuestions, ...filteredUserQuestions];
+    let allQuestions = [...apiQuestions, ...filteredUserQuestions];
 
-    return combinedQuestions; // return merged list
+    // Shuffle and limit to 5 questions
+    let finalQuestions = shuffleArray(allQuestions).slice(0, 5);
+
+    return finalQuestions; // return merged list
   } catch (error) {
     console.error("Error fetching questions:", error);
     return [];
   }
+}
+
+// shuffling arrays - moved from main quiz file
+function shuffleArray(array) {
+  return array
+    .map((item) => ({ item, order: Math.random() }))
+    .sort((a, b) => a.order - b.order)
+    .map(({ item }) => item);
 }

@@ -21,5 +21,5 @@ if (document.querySelector(".quizInterface")) {
 }
 
 if (document.querySelector(".newQuestionForm")) {
-  crud; // Run this only if the crud page is loaded
+  crud(); // Run this only if the crud page is loaded
 }
