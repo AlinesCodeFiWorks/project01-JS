@@ -23,7 +23,7 @@ export async function fetchQuestions(
     // Convert category to number (ensuring correct comparison)
     let categoryNum = category ? Number(category) : null;
 
-    // Filter user questions based on selected difficulty and category -optional
+    // Filter user questions based on selected difficulty and category
     let filteredUserQuestions = userQuestions.filter((q) => {
       return (
         (!difficulty || q.difficulty === difficulty) &&

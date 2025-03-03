@@ -4,19 +4,19 @@
   --backgroundQuiz: rgba(255, 255, 0, 0.748);
   --backgroundResult: pink;
   --backgroundCrud: purple;
-  --fontStd: black;
+  --fontStd: rgb(255, 255, 255);
   --fontHighlighted: blue;
-  --linkStd: red;
-  --linkHighlighted: red;
+  --linkStd: rgb(101, 23, 118);
+  --linkHighlighted: rgb(177, 49, 199);
   --inputField: white;
-  --buttonStd: white;
+  --buttonStd: rgb(214, 220, 153);
   --buttonHighlighted: gray;
   --containerMain: rgba(255, 255, 0, 0.759);
   --containerHighlighted: red;
   --backgroundPattern: url("https://static.vecteezy.com/system/resources/previews/002/774/065/non_2x/abstract-simple-geometric-background-with-different-geometric-shapes-square-triangles-circles-dots-lines-memphis-style-bright-and-colorful-90s-style-neon-colors-pattern-vector.jpg");
   --neonBlue: #00ffff;
   --neonPink: #ff00ff;
-  --neonOrange: #ff7f00;
+  --neonOrange: #e2a364;
   --neonGreen: #39ff14;
   --neonPurple: #8a2be2;
   --frostedOverlay: rgba(255, 255, 255, 0.5);
@@ -101,7 +101,7 @@ button {
   padding: 10px 20px;
   font-weight: bold;
   background-color: var(--buttonStd);
-  color: var(--fontStd);
+  color: var(--fontHighlighted);
   transition: all 0.3s ease;
 }
 

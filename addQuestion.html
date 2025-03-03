@@ -12,109 +12,109 @@
       <!-- TODO load header partial here -->
     </header>
     <main>
-      <div class="intro">
+      <div class="intro frosted-overlay">
         <h1>Quiz Master</h1>
         <h2>Add Your Own</h2>
         <p>
           Submit your own questions to the quiz, or clear all previously
           submitted questions.
         </p>
-      </div>
-      <div class="crud">
-        <form class="newQuestionForm">
-          <!-- Input: difficulty -->
-          <label for="newDiff">Difficulty level:</label>
-          <select name="newDiff" id="newDiff" required>
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-          </select>
-          <br />
-          <!-- Input: category -->
-          <label for="newCat">Category:</label>
-          <select name="newCat" id="newCat" required>
-            <option value="">Any</option>
-            <option value="9">General Knowledge</option>
-            <option value="10">Books</option>
-            <option value="11">Film</option>
-            <option value="12">Music</option>
-            <option value="14">Televison</option>
-            <option value="15">Video Games</option>
-            <option value="17">Science & Nature</option>
-            <option value="18">Computers</option>
-            <option value="20">Mythology</option>
-            <option value="21">Sports</option>
-            <option value="22">Geography</option>
-            <option value="23">History</option>
-            <option value="25">Art</option>
-            <option value="27">Animals</option>
-            <option value="28">Vehicles</option>
-          </select>
-          <br />
-          <!-- Input: question -->
-          <label for="newQuestion">Question:</label>
-          <input
-            type="text"
-            id="newQuestion"
-            name="newQuestion"
-            minlength="4"
-            maxlength="100"
-            required
-          />
-          <br />
-          <!-- Input: correct answer -->
-          <label for="newCorrectAnswer">Correct answer:</label>
-          <input
-            type="text"
-            class="newCorrectAnswer"
-            name="newCorrectAnswer"
-            minlength="1"
-            maxlength="50"
-            required
-          />
-          <br />
-          <!-- Input: incorrect answers -->
-          <label for="newIncorrectAnswer">Incorrect answers:</label>
-          <input
-            type="text"
-            class="newIncorrectAnswer"
-            name="newIncorrectAnswer"
-            minlength="1"
-            maxlength="50"
-            required
-          />
-          <br />
-          <input
-            type="text"
-            class="newIncorrectAnswer"
-            name="newIncorrectAnswer"
-            minlength="1"
-            maxlength="50"
-            required
-          />
-          <br />
-          <input
-            type="text"
-            class="newIncorrectAnswer"
-            name="newIncorrectAnswer"
-            minlength="1"
-            maxlength="50"
-            required
-          />
-          <br />
+        <div class="crud">
+          <form class="newQuestionForm">
+            <!-- Input: difficulty -->
+            <label for="newDiff">Difficulty level:</label>
+            <select name="newDiff" id="newDiff" required>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+            <br />
+            <!-- Input: category -->
+            <label for="newCat">Category:</label>
+            <select name="newCat" id="newCat" required>
+              <option value="">Any</option>
+              <option value="9">General Knowledge</option>
+              <option value="10">Books</option>
+              <option value="11">Film</option>
+              <option value="12">Music</option>
+              <option value="14">Televison</option>
+              <option value="15">Video Games</option>
+              <option value="17">Science & Nature</option>
+              <option value="18">Computers</option>
+              <option value="20">Mythology</option>
+              <option value="21">Sports</option>
+              <option value="22">Geography</option>
+              <option value="23">History</option>
+              <option value="25">Art</option>
+              <option value="27">Animals</option>
+              <option value="28">Vehicles</option>
+            </select>
+            <br />
+            <!-- Input: question -->
+            <label for="newQuestion">Question:</label>
+            <input
+              type="text"
+              id="newQuestion"
+              name="newQuestion"
+              minlength="4"
+              maxlength="100"
+              required
+            />
+            <br />
+            <!-- Input: correct answer -->
+            <label for="newCorrectAnswer">Correct answer:</label>
+            <input
+              type="text"
+              class="newCorrectAnswer"
+              name="newCorrectAnswer"
+              minlength="1"
+              maxlength="50"
+              required
+            />
+            <br />
+            <!-- Input: incorrect answers -->
+            <label for="newIncorrectAnswer">Incorrect answers:</label>
+            <input
+              type="text"
+              class="newIncorrectAnswer"
+              name="newIncorrectAnswer"
+              minlength="1"
+              maxlength="50"
+              required
+            />
+            <br />
+            <input
+              type="text"
+              class="newIncorrectAnswer"
+              name="newIncorrectAnswer"
+              minlength="1"
+              maxlength="50"
+              required
+            />
+            <br />
+            <input
+              type="text"
+              class="newIncorrectAnswer"
+              name="newIncorrectAnswer"
+              minlength="1"
+              maxlength="50"
+              required
+            />
+            <br />
 
-          <button type="submit">Submit my question</button>
-        </form>
+            <button type="submit">Submit my question</button>
+          </form>
+          <br />
+          <h2>Submitted Questions</h2>
+          <ul id="questionList"></ul>
+          <button class="clearSubmittedQuestions">
+            Clear all previously submitted questions
+          </button>
+        </div>
         <br />
-        <h2>Submitted Questions</h2>
-        <ul id="questionList"></ul>
-        <button class="clearSubmittedQuestions">
-          Clear all previously submitted questions
-        </button>
-      </div>
-      <br />
-      <div class="finalRedirection">
-        <button><a href="index.html">Home</a></button>
+        <div class="finalRedirection">
+          <button><a href="index.html">Home</a></button>
+        </div>
       </div>
     </main>
     <footer>
