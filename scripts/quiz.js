@@ -59,9 +59,14 @@ export function renderQuiz(dataSet) {
   }
   // ensuring button exists before attaching an event listener
   setTimeout(() => {
-    document.querySelector(".submitAnswer").addEventListener("click", () => {
-      evaluateAnswer(currentQuestion, dataSet);
-    });
+    const submitButton = document.querySelector(".submitAnswer");
+    if (submitButton) {
+      // displaying buttom again when quiz is reloaded
+      submitButton.classList.remove("disabled");
+      submitButton.addEventListener("click", () => {
+        evaluateAnswer(currentQuestion, dataSet);
+      });
+    }
   }, 0);
 }
 
@@ -149,6 +154,13 @@ export function evaluateAnswer(questionIndex, dataSet) {
     return;
   }
 
+  // disable the submit button
+  const submitButton = document.querySelector(".submitAnswer");
+  if (submitButton) {
+    // hiding submit button when answer is submitted;
+    submitButton.classList.add("disabled");
+  }
+
   // integrate user-submitted question format
   const correctAnswer = question.correct_answer || question.correctAnswer;
 
@@ -161,7 +173,7 @@ export function evaluateAnswer(questionIndex, dataSet) {
   }
 
   const scoreTracker = document.querySelector(".scoreTracker");
-  scoreTracker.innerHTML = `<p>${currentScore} out of 5</p>`;
+  scoreTracker.innerHTML = `<p>${currentScore} out of ${dataSet.length}</p>`;
 
   // create next button
   const nextButton = document.createElement("button");

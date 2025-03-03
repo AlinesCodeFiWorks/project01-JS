@@ -60,6 +60,9 @@ button:hover {
   background-color: none;
   display: grid;
 }
+.disabled {
+  display: none;
+}
 /* result page styling */
 .finalScore {
   background-color: none;
