@@ -1,3 +1,4 @@
+//API: https://opentdb.com/api_config.php
 export async function fetchQuestions(
   amount = 5,
   category = "",
@@ -5,7 +6,10 @@ export async function fetchQuestions(
   type = "multiple"
 ) {
   try {
-    const url = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`;
+    let url = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`;
+
+    console.log("Fetching with:", { amount, category, difficulty, type });
+
     const response = await fetch(url);
     const data = await response.json();
 
@@ -16,11 +20,14 @@ export async function fetchQuestions(
     let apiQuestions = data.results || []; // api questions
     let userQuestions = JSON.parse(localStorage.getItem("questions")) || []; // custom questions
 
+    // Convert category to number (ensuring correct comparison)
+    let categoryNum = category ? Number(category) : null;
+
     // Filter user questions based on selected difficulty and category -optional
     let filteredUserQuestions = userQuestions.filter((q) => {
       return (
         (!difficulty || q.difficulty === difficulty) &&
-        (!category || q.category === category)
+        (!category || q.category === category) // Use == for potential string/number mismatch
       );
     });
 
@@ -28,9 +35,7 @@ export async function fetchQuestions(
     let allQuestions = [...apiQuestions, ...filteredUserQuestions];
 
     // Shuffle and limit to 5 questions
-    let finalQuestions = shuffleArray(allQuestions).slice(0, 5);
-
-    return finalQuestions; // return merged list
+    return shuffleArray(allQuestions).slice(0, 5); // return merged list
   } catch (error) {
     console.error("Error fetching questions:", error);
     return [];

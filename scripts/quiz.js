@@ -1,7 +1,7 @@
 // Get category and difficulty from the URL
 const urlParams = new URLSearchParams(window.location.search);
 const category = urlParams.get("category") || "";
-const difficulty = urlParams.get("difficulty") || "";
+const difficulty = urlParams.get("difficulty") || "easy";
 
 import { fetchQuestions } from "../data/questions.js";
 

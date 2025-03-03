@@ -18,9 +18,9 @@
       </div>
       <div class="quizSelections">
         <form id="quiz-settings">
-          <label
+          <label for="category"
             >Category:
-            <select id="category">
+            <select id="category" name="category">
               <option value="">Any</option>
               <option value="9">General Knowledge</option>
               <option value="10">Books</option>
@@ -40,16 +40,16 @@
             </select>
           </label>
 
-          <label
+          <label for="difficulty"
             >Difficulty:
-            <select id="difficulty">
+            <select id="difficulty" name="difficulty">
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
               <option value="hard">Hard</option>
             </select>
           </label>
 
-          <button type="submit">Start Quiz</button>
+          <button id="startQuizBtn" type="submit">Start Quiz</button>
         </form>
       </div>
 
